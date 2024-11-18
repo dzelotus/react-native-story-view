@@ -71,7 +71,7 @@ const MultiStoryListItem = forwardRef<ListItemRef, MultiStoryListItemProps>(
           style={[styles.itemContainer, animationStyle]}>
           {storyIndex === index || isTransitionActive ? (
             <StoryContainer
-              visible={true}
+              visible
               extended={false}
               key={index + item?.id}
               ref={storyRef}
@@ -129,6 +129,12 @@ const MultiStoryContainer = ({
     itemsRef.current[storyIndexRef.current]?.handleLongPress(visiblity);
   };
 
+  const onScrollBeginDragFlashList = () => {
+    setIsScrollActive(true);
+    isScrollActiveRef.current = true;
+    itemsRef.current[storyIndex]?.onScrollBegin();
+  };
+
   const {
     storyIndex,
     onViewRef,
@@ -152,12 +158,6 @@ const MultiStoryContainer = ({
     visible
   );
 
-  const onScrollBeginDragFlashList = () => {
-    setIsScrollActive(true);
-    isScrollActiveRef.current = true;
-    itemsRef.current[storyIndex]?.onScrollBegin();
-  };
-
   const onScrollEndDragFlashList = () => {
     setIsScrollActive(false);
     isScrollActiveRef.current = false;
@@ -169,13 +169,12 @@ const MultiStoryContainer = ({
     onUserStoryIndexChange?.(storyIndex);
   }, [onUserStoryIndexChange, storyIndex]);
 
-  if (!visible) return null;
+  if (!visible) {
+    return null;
+  }
 
   return (
-    <Modal
-      visible={visible}
-      transparent={true}
-      onRequestClose={() => onComplete?.()}>
+    <Modal visible={visible} transparent onRequestClose={() => onComplete?.()}>
       <GestureHandlerRootView style={styles.rootViewStyle}>
         <GestureDetector gesture={gestureHandler}>
           <Animated.View

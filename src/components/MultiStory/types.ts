@@ -9,10 +9,10 @@ import type {
 
 export interface MultiStoryBaseProps extends Partial<FlatListProps<any>> {
   stories: StoriesType[];
-  onComplete?: (viewedStories?: Array<boolean[]>) => void;
+  onComplete?: (viewedStories?: boolean[][]) => void;
   onChangePosition?: (progressIndex: number, storyIndex: number) => void;
   avatarProps?: StoryAvatarStyleProps;
-  viewedStories?: Array<boolean[]>;
+  viewedStories?: boolean[][];
   storyContainerProps?: Omit<StoryContainerProps, 'stories'>;
   transitionMode?: TransitionMode;
   renderOverlayView?: (item: StoryType) => JSX.Element;

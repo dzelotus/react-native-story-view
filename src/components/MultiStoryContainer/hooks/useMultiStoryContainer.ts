@@ -42,7 +42,9 @@ const useMultiStoryContainer = (
   });
 
   const updateStoryIndex = () => {
-    if (viewableItemsRef.current?.index == null) return;
+    if (viewableItemsRef.current?.index === null) {
+      return;
+    }
     /* viewableItems returns array of current/next viewable item
            During story transition current/next or previous/current both visible on screen so array contains both items.
            To consider only next/previous item, checking length is only 1 and it is not previous story.
@@ -59,7 +61,7 @@ const useMultiStoryContainer = (
 
   const onViewRef = ({ viewableItems }: ViewConfig) => {
     const index = viewableItems?.[0]?.index;
-    viewableItemsRef.current = { index: index, length: viewableItems?.length };
+    viewableItemsRef.current = { index, length: viewableItems?.length };
 
     // If scrolling is active, we will update the story index on scroll end.
     // If scrolling is not active, we will update the story index on view change.

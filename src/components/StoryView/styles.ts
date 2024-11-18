@@ -41,6 +41,9 @@ const styles = StyleSheet.create({
   },
   progressiveImageContainer: {
     backgroundColor: 'transparent',
+    borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16,
+    overflow: 'hidden',
   },
   parentView: {
     flex: 1,
@@ -81,18 +84,20 @@ const styles = StyleSheet.create({
   },
   contentVideoView: {
     flex: 1,
-    borderRadius: 4,
+    borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16,
     overflow: 'hidden',
-    backgroundColor: 'transparent',
+    backgroundColor: 'black',
   },
   progressBarArray: {
     flexDirection: 'row',
     position: 'absolute',
     top: verticalScale(10),
-    width: '98%',
     height: verticalScale(10),
     justifyContent: 'space-between',
     alignItems: 'center',
+    left: 10,
+    right: 10,
   },
   progressBarContainer: {
     flex: 1,

@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Animated, Easing } from 'react-native';
 import { Colors } from '../../../theme';
-import { ProgressBarProps, StroyTypes } from '../types';
-import { ProgressState } from '../types';
+import { ProgressBarProps, StroyTypes, ProgressState } from '../types';
 
 const useProgressBar = ({
   active,
@@ -29,7 +28,9 @@ const useProgressBar = ({
   }, [storyIndex, currentIndex, index, scale, duration, setRemainingTime]);
 
   useEffect(() => {
-    if (isVideoStory.current) return;
+    if (isVideoStory.current) {
+      return;
+    }
     const progressBarWidth =
       Number.parseInt(JSON.stringify(scaleRef.current), 10) ?? 0;
     setRemainingTime(duration - (progressBarWidth * duration) / width);
@@ -52,21 +53,25 @@ const useProgressBar = ({
   }, [remainingTime, scale, props?.pause, duration]);
 
   useEffect(() => {
-    if (isVideoStory.current) return;
+    if (isVideoStory.current) {
+      return;
+    }
     switch (active) {
       case ProgressState.Default:
         return scale.setValue(0);
       case ProgressState.InProgress:
-        if (props.isLoaded)
+        if (props.isLoaded) {
           return Animated.timing(scale, {
             toValue: width,
             duration: getDuration(),
             easing: Easing.linear,
             useNativeDriver: false,
           }).start(({ finished }) => {
-            if (finished) props?.next && props?.next();
+            if (finished) {
+              props?.next && props?.next();
+            }
           });
-        else {
+        } else {
           return scale.setValue(0);
         }
       case ProgressState.Completed:
@@ -81,7 +86,9 @@ const useProgressBar = ({
   }, [active, isVideoStory, getDuration, props, scale, width]);
 
   useEffect(() => {
-    if (!isVideoStory.current) return;
+    if (!isVideoStory.current) {
+      return;
+    }
     switch (active) {
       case ProgressState.Default:
         return scale.setValue(0);

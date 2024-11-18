@@ -41,7 +41,9 @@ const MultiStory = forwardRef<MultiStoryRef, MultiStoryProps>(
       Array(stories.length)
         .fill(stories)
         .map((row, index) =>
-          row?.[index]?.stories.map((item: StoryType) => item?.isSeen ?? false)
+          row?.[index]?.stories.map((item: StoryType) => {
+            return item?.customProps?.isSeen ?? false;
+          })
         )
     );
 
@@ -55,8 +57,10 @@ const MultiStory = forwardRef<MultiStoryRef, MultiStoryProps>(
     };
 
     const onUserStoryIndexChange = (index: number) => {
-      if (pressedIndex === index) return;
-      profileRef.current?.scrollToIndex({ index: index, animated: false });
+      if (pressedIndex === index) {
+        return;
+      }
+      profileRef.current?.scrollToIndex({ index, animated: false });
       setPressedIndex(index);
     };
 

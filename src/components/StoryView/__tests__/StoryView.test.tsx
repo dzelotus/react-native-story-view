@@ -20,7 +20,7 @@ describe('StoryView component', () => {
 describe('StoryContainer component', () => {
   it('Match Snapshot', () => {
     const { toJSON } = render(
-      <StoryContainer visible={true} stories={[]} maxVideoDuration={5} />
+      <StoryContainer visible stories={[]} maxVideoDuration={5} />
     );
     expect(toJSON()).toMatchSnapshot();
   });
@@ -31,14 +31,14 @@ describe('ProgressView component', () => {
     const { toJSON } = render(
       <ProgressView
         storyIndex={0}
-        isLoaded={true}
+        isLoaded
         duration={10}
         pause={false}
         stories={[]}
         currentIndex={0}
-        currentStory={0}
+        currentStory={{}}
         length={[]}
-        progress={0}
+        progress={{}}
         videoDuration={[]}
         setVideoDuration={() => {}}
       />

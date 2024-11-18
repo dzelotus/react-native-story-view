@@ -10,11 +10,8 @@ import type {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import type {
-  OnLoadData,
-  OnProgressData,
-  VideoProperties,
-} from 'react-native-video';
+
+import type { OnLoadData, OnProgressData } from 'react-native-video';
 
 export enum StroyTypes {
   Image = 'image',
@@ -46,7 +43,7 @@ export enum OverlayPositions {
 }
 
 export interface CommonProps {
-  images?: Array<string>;
+  images?: string[];
   duration?: number | undefined;
   containerStyle?: ViewStyle;
   enableProgress?: boolean | undefined;
@@ -84,11 +81,11 @@ export interface ProgressBarProps extends ProgressBarCommonProps {
 
 export interface ProgressBarsProps extends ProgressBarCommonProps {
   stories: StoryType[];
-  currentStory: Object;
+  currentStory: object;
   videoDuration: number[];
   setVideoDuration: (duration: number[]) => void;
-  length: Array<number>;
-  progress: Object;
+  length: number[];
+  progress: object;
   storyIndex: number;
   index?: number;
 }
@@ -103,9 +100,10 @@ export interface StoryViewProps {
   stories: StoryType[];
   showSourceIndicator?: boolean;
   sourceIndicatorProps?: ActivityIndicatorProps;
-  videoProps?: VideoProperties;
+  videoProps?: any;
   index?: number;
   storyIndex?: number;
+  setPause?: (value: boolean) => void;
 }
 
 export interface StoryViewProps extends CommonProps {
@@ -146,7 +144,7 @@ export interface StoryContainerBaseProps extends CommonProps {
   renderIndicatorComponent?: () => JSX.Element;
   userProfile?: UserProps | undefined;
   footerView?: FooterViewProps | undefined;
-  onComplete?: (viewedStories?: Array<boolean[]>) => void;
+  onComplete?: (viewedStories?: boolean[][]) => void;
   renderCustomView?: (callback: CallbackProps) => JSX.Element;
   backgroundColor?: string;
   style?: ViewStyle;
@@ -158,7 +156,7 @@ export interface StoryContainerBaseProps extends CommonProps {
   storyContainerViewProps?: ViewProps;
   showSourceIndicator?: boolean;
   sourceIndicatorProps?: ActivityIndicatorProps;
-  videoProps?: VideoProperties;
+  videoProps?: any;
   onChangePosition?: (
     progressIndex: number,
     userStoryIndex?: number
@@ -227,7 +225,20 @@ export type StoryType = {
   title?: string;
   showOverlay?: boolean;
   link?: string;
+  swipeText?: string | undefined;
+  customProps?: IStoriesCustomProps;
 };
+export interface IStoriesCustomProps {
+  link: string;
+  isSeen: boolean;
+  currentGrade: STORY_GRADE_TYPE;
+}
+
+export enum STORY_GRADE_TYPE {
+  STORIES_GRADE_NONE = 0,
+  STORIES_GRADE_LIKE = 1,
+  STORIES_GRADE_DISLIKE = 2,
+}
 
 export type StoriesType = {
   username?: string;

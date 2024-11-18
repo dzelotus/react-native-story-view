@@ -20,7 +20,7 @@ export interface MultiStoryContainerProps
   onUserStoryIndexChange?: (index: number) => void;
   userStoryIndex?: number;
   visible?: boolean;
-  viewedStories: Array<boolean[]>;
+  viewedStories: boolean[][];
   pointers?: { pageX: number; pageY: number };
   onChangePosition?: (
     storyIndex: number,
@@ -34,7 +34,7 @@ export interface MultiStoryListItemProps
   item: StoriesType;
   index: number;
   storyIndex: number;
-  viewedStories: Array<boolean[]>;
+  viewedStories: boolean[][];
   nextStory?: () => void;
   previousStory?: () => void;
   onComplete?: () => void;
@@ -50,8 +50,8 @@ export interface MultiStoryListItemProps
 }
 
 export interface ViewConfig {
-  viewableItems: Array<ViewToken>;
-  changed: Array<ViewToken>;
+  viewableItems: ViewToken[];
+  changed: ViewToken[];
 }
 
 export interface ListItemProps {

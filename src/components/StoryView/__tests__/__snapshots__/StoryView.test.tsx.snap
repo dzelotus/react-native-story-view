@@ -9,9 +9,10 @@ exports[`ProgressView component Match Snapshot 1`] = `
       "flexDirection": "row",
       "height": 16.428571428571427,
       "justifyContent": "space-between",
+      "left": 10,
       "position": "absolute",
+      "right": 10,
       "top": 16.428571428571427,
-      "width": "98%",
     }
   }
 />
@@ -97,51 +98,81 @@ exports[`StoryContainer component Match Snapshot 1`] = `
                 ]
               }
             >
-              <Video
-                bufferConfig={
-                  Object {
-                    "bufferForPlaybackAfterRebufferMs": 60000,
-                    "bufferForPlaybackMs": 60000,
-                    "minBufferMs": 60000,
-                  }
-                }
-                onBuffer={[Function]}
-                onEnd={[Function]}
-                onError={[Function]}
-                onLoad={[Function]}
-                onLoadStart={[Function]}
-                onProgress={[Function]}
-                onReadyForDisplay={[Function]}
-                paused={true}
-                resizeMode="contain"
-                source={
-                  Object {
-                    "uri": undefined,
-                  }
-                }
-                style={
-                  Object {
-                    "backgroundColor": "transparent",
-                    "borderRadius": 4,
-                    "flex": 1,
-                    "overflow": "hidden",
-                  }
-                }
-              />
-              <ActivityIndicator
-                animating={true}
-                color="#575899"
-                pointerEvents="none"
-                size="small"
+              <View
                 style={
                   Object {
                     "flex": 1,
-                    "left": "45%",
-                    "position": "absolute",
-                    "top": "50%",
                   }
                 }
-              />
+              >
+                <Video
+                  bufferConfig={
+                    Object {
+                      "bufferForPlaybackAfterRebufferMs": 1000,
+                      "bufferForPlaybackMs": 1000,
+                      "minBufferMs": 1000,
+                    }
+                  }
+                  onBuffer={[Function]}
+                  onEnd={[Function]}
+                  onError={[Function]}
+                  onLoad={[Function]}
+                  onProgress={[Function]}
+                  onSeek={[Function]}
+                  paused={true}
+                  resizeMode="cover"
+                  source={
+                    Object {
+                      "uri": undefined,
+                    }
+                  }
+                  style={
+                    Object {
+                      "backgroundColor": "black",
+                      "borderBottomLeftRadius": 16,
+                      "borderBottomRightRadius": 16,
+                      "flex": 1,
+                      "overflow": "hidden",
+                    }
+                  }
+                />
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      Object {
+                        "color": "red",
+                        "fontSize": 16,
+                      }
+                    }
+                  />
+                </View>
+                <ActivityIndicator
+                  animating={true}
+                  color="#575899"
+                  pointerEvents="none"
+                  size="small"
+                  style={
+                    Object {
+                      "flex": 1,
+                      "left": "45%",
+                      "position": "absolute",
+                      "top": "50%",
+                    }
+                  }
+                />
+              </View>
             </View>
           </View>
           <View
@@ -167,9 +198,10 @@ exports[`StoryContainer component Match Snapshot 1`] = `
                   "flexDirection": "row",
                   "height": 16.428571428571427,
                   "justifyContent": "space-between",
+                  "left": 10,
                   "position": "absolute",
+                  "right": 10,
                   "top": 16.428571428571427,
-                  "width": "98%",
                 }
               }
             />
@@ -198,36 +230,80 @@ exports[`StoryView component Match Snapshot 1`] = `
     ]
   }
 >
-  <Video
-    bufferConfig={
-      Object {
-        "bufferForPlaybackAfterRebufferMs": 60000,
-        "bufferForPlaybackMs": 60000,
-        "minBufferMs": 60000,
-      }
-    }
-    onBuffer={[Function]}
-    onError={[Function]}
-    onLoad={[Function]}
-    onLoadStart={[Function]}
-    onProgress={[Function]}
-    onReadyForDisplay={[Function]}
-    paused={true}
-    resizeMode="contain"
-    source={
-      Object {
-        "uri": undefined,
-      }
-    }
+  <View
     style={
       Object {
-        "backgroundColor": "transparent",
-        "borderRadius": 4,
         "flex": 1,
-        "overflow": "hidden",
       }
     }
-  />
+  >
+    <Video
+      bufferConfig={
+        Object {
+          "bufferForPlaybackAfterRebufferMs": 1000,
+          "bufferForPlaybackMs": 1000,
+          "minBufferMs": 1000,
+        }
+      }
+      onBuffer={[Function]}
+      onError={[Function]}
+      onLoad={[Function]}
+      onProgress={[Function]}
+      onSeek={[Function]}
+      paused={true}
+      resizeMode="cover"
+      source={
+        Object {
+          "uri": undefined,
+        }
+      }
+      style={
+        Object {
+          "backgroundColor": "black",
+          "borderBottomLeftRadius": 16,
+          "borderBottomRightRadius": 16,
+          "flex": 1,
+          "overflow": "hidden",
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "red",
+            "fontSize": 16,
+          }
+        }
+      />
+    </View>
+    <ActivityIndicator
+      animating={true}
+      color="#575899"
+      pointerEvents="none"
+      size="small"
+      style={
+        Object {
+          "flex": 1,
+          "left": "45%",
+          "position": "absolute",
+          "top": "50%",
+        }
+      }
+    />
+  </View>
 </View>
 `;
 

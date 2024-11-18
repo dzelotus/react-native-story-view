@@ -14,12 +14,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: moderateScale(35),
-    borderColor: Colors.pink,
-    borderWidth: 2,
-    marginRight: moderateScale(16),
+    borderColor: '#03A500',
+    borderWidth: 3,
+    marginRight: moderateScale(10),
   },
   viewedStoryContainer: {
-    borderColor: Colors.inActiveColor,
+    borderColor: '#CB11AB',
   },
   username: {
     alignSelf: 'center',

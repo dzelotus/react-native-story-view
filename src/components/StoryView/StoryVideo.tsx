@@ -1,0 +1,149 @@
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  View,
+  ActivityIndicator,
+  Platform,
+  ActivityIndicatorProps,
+  Text,
+} from 'react-native';
+import Video, { VideoRef, OnBufferData } from 'react-native-video';
+import type { OnLoadData, OnProgressData } from 'react-native-video';
+import styles from './styles';
+import { Colors } from '../../theme';
+import type { StoryType } from './types';
+
+const MIN_BUFFER_TIME = 1000 * 1;
+const PlAYBACK_BUFFER_TIME = 1000 * 1;
+const PLAYBACK_AFTER_REBUFFER = 1000 * 1;
+
+interface StoryVideoProps {
+  source: StoryType;
+  pause: boolean;
+  index?: number;
+  storyIndex?: number;
+  setPause?: (value: boolean) => void;
+  onVideoEnd?: () => void;
+  onVideoProgress?: (progressData?: OnProgressData) => void;
+  videoProps: any;
+  showSourceIndicator?: boolean;
+  sourceIndicatorProps?: ActivityIndicatorProps;
+}
+
+const StoryVideo = ({
+  source,
+  pause,
+  index,
+  storyIndex,
+  setPause,
+  onVideoEnd,
+  onVideoProgress,
+  sourceIndicatorProps,
+}: StoryVideoProps) => {
+  const [loading, setLoading] = useState(true);
+  const [buffering, setBuffering] = useState(true);
+
+  const videoRef = useRef<VideoRef>(null);
+  const videoData = useRef<OnLoadData>();
+
+  const isCurrentIndex = index === storyIndex;
+
+  useEffect(() => {
+    if (index === storyIndex) {
+      if (Platform.OS === 'android' || source?.url?.endsWith('m3u8')) {
+        videoRef?.current?.seek(0);
+      } else {
+        videoRef?.current?.seek(1);
+      }
+    }
+  }, [storyIndex, index, source?.url]);
+
+  const loadVideo = async () => {
+    if (isCurrentIndex) {
+      if (videoData.current === undefined) {
+        return;
+      }
+      if (loading) {
+        setLoading(false);
+      }
+      if (buffering) {
+        setBuffering(false);
+      }
+    }
+  };
+
+  const onBuffer = (data: OnBufferData) => {
+    setBuffering(data.isBuffering);
+  };
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Video
+        ref={videoRef}
+        resizeMode="cover"
+        paused={pause || loading}
+        source={{ uri: source?.url }}
+        onSeek={event => {
+          if (index === storyIndex) {
+            if (Platform.OS === 'ios' && !source?.url?.endsWith('m3u8')) {
+              if (event.seekTime === 1) {
+                videoRef?.current?.seek(0.15);
+                setPause?.(true);
+                setPause?.(false);
+                videoRef?.current?.resume();
+              } else {
+                videoRef?.current?.resume();
+              }
+            }
+          }
+        }}
+        onEnd={onVideoEnd}
+        onError={(_error: any) => {
+          setLoading(false);
+        }}
+        onProgress={data => {
+          if (isCurrentIndex) {
+            onVideoProgress?.(data);
+          }
+        }}
+        bufferConfig={{
+          minBufferMs: MIN_BUFFER_TIME,
+          bufferForPlaybackMs: PlAYBACK_BUFFER_TIME,
+          bufferForPlaybackAfterRebufferMs: PLAYBACK_AFTER_REBUFFER,
+        }}
+        onBuffer={onBuffer}
+        onLoad={(item: OnLoadData) => {
+          videoData.current = item;
+          videoRef?.current?.resume();
+          loadVideo();
+        }}
+        style={styles.contentVideoView}
+      />
+      <View
+        style={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text style={{ color: 'red', fontSize: 16 }}>
+          {source?.url?.split('.').pop()}
+        </Text>
+      </View>
+      {(loading || buffering) && (
+        <ActivityIndicator
+          animating
+          pointerEvents="none"
+          color={Colors.loaderColor}
+          size="small"
+          style={styles.loaderView}
+          {...sourceIndicatorProps}
+        />
+      )}
+    </View>
+  );
+};
+
+export default React.memo(StoryVideo);

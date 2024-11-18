@@ -4,7 +4,6 @@ import React, {
   useImperativeHandle,
   useMemo,
   useRef,
-  useState,
 } from 'react';
 import {
   KeyboardAvoidingView,
@@ -24,7 +23,6 @@ import {
   ClickPosition,
   OverlayPositions,
   StoryContainerProps,
-  StoryMode,
   StoryRef,
 } from './types';
 
@@ -103,20 +101,8 @@ const StoryContainer = forwardRef<StoryRef, StoryContainerProps>(
       );
     }, [progressIndex, props.stories, setDuration, setLoaded]);
 
-    const storyMode: StoryMode =
-      props?.userStoryIndex !== undefined
-        ? StoryMode.MultiStory
-        : StoryMode.SingleStory;
-    const [viewHeight, setViewHeight] = useState<number>(0);
-    const bottom =
-      storyMode === StoryMode.SingleStory
-        ? isKeyboardVisible
-          ? viewHeight
-          : 0
-        : 0;
-
     const overlayViewStyles = useMemo(() => {
-      let style: StyleProp<ViewStyle> = [styles.overlayViewStyle];
+      const style: StyleProp<ViewStyle> = [styles.overlayViewStyle];
 
       if (overlayViewPostion === OverlayPositions.Middle) {
         style.push(styles.overlayMiddleViewStyle);
@@ -137,7 +123,9 @@ const StoryContainer = forwardRef<StoryRef, StoryContainerProps>(
             {...storyContainerViewProps}>
             <View
               onLayout={({ nativeEvent }) => {
-                if (isKeyboardVisible) return;
+                if (isKeyboardVisible) {
+                  return;
+                }
                 const { height } = nativeEvent.layout;
                 viewRef?.current?.setNativeProps({ height });
               }}
@@ -153,8 +141,7 @@ const StoryContainer = forwardRef<StoryRef, StoryContainerProps>(
                 onPressOut={onStoryPressRelease}>
                 {props.stories?.[progressIndex]?.showOverlay && (
                   <View style={overlayViewStyles}>
-                    {renderOverlayView &&
-                      renderOverlayView(props.stories?.[progressIndex])}
+                    {renderOverlayView?.(props.stories?.[progressIndex])}
                   </View>
                 )}
 
@@ -168,6 +155,7 @@ const StoryContainer = forwardRef<StoryRef, StoryContainerProps>(
                   onVideoEnd={onVideoEnd}
                   onVideoProgress={onVideoProgress}
                   pause={isPause}
+                  setPause={setPause}
                   index={props?.index ?? 0}
                   storyIndex={props?.userStoryIndex ?? 0}
                   stories={props.stories}
@@ -239,14 +227,7 @@ const StoryContainer = forwardRef<StoryRef, StoryContainerProps>(
           </View>
           {renderFooterComponent && (
             <Animated.View
-              style={[
-                styles.bottomView,
-                props?.footerStyle ?? {},
-                { opacity, bottom },
-              ]}
-              onLayout={({ nativeEvent }) => {
-                setViewHeight(nativeEvent.layout.height);
-              }}
+              style={[props?.footerStyle ?? {}, { opacity }]}
               {...footerViewProps}>
               <>
                 {renderFooterComponent?.({
@@ -267,7 +248,7 @@ const StoryContainer = forwardRef<StoryRef, StoryContainerProps>(
         <KeyboardAvoidingView
           style={containerStyle}
           keyboardVerticalOffset={Metrics.keyboardVerticalOffset}
-          behavior={'padding'}>
+          behavior="padding">
           {props.visible && storyViewContent()}
         </KeyboardAvoidingView>
       </SafeAreaView>

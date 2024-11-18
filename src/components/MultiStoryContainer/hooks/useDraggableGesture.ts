@@ -48,10 +48,12 @@ const useDraggableGesture = ({
   };
 
   const panGesture = Gesture.Pan()
-    .activateAfterLongPress(200)
-    .enabled(!isScrollActive) // To disable the pan gesture while FlashList is scrolling
+    .activeOffsetY(10) // To disable the pan gesture while FlashList is scrolling
     .onChange(event => {
-      if (event.velocityY === 0) return;
+      if (event.velocityY === 0) {
+        return;
+      }
+
       if (event.translationY <= 0) {
         translateY.value = 0;
         return;
@@ -59,7 +61,9 @@ const useDraggableGesture = ({
       isLongPressed.value = true;
 
       translateX.value = 0;
-      translateY.value = event.translationY;
+      if (event.velocityY > 100) {
+        translateY.value = event.translationY;
+      }
 
       // When user swipe down to scroll point then set isDragged to true
       if (event.translationY > scrollDragPoint) {
@@ -109,7 +113,7 @@ const useDraggableGesture = ({
 
   const longPressGesture = Gesture.LongPress()
     .enabled(!isScrollActive) // To disable the long press while FlashList is scrolling
-    .minDuration(200) // To disable the min duration
+    .minDuration(500) // To disable the min duration
     .maxDistance(10000) // To disable the max distance
     .onStart(() => {
       isLongPressed.value = true;
@@ -137,7 +141,9 @@ const useDraggableGesture = ({
    */
   const handleVisibility = useCallback(
     () => {
-      if (isLongPressed.value === undefined) return;
+      if (isLongPressed.value === undefined) {
+        return;
+      }
       handleLongPress?.(isLongPressed.value);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -147,7 +153,9 @@ const useDraggableGesture = ({
   useAnimatedReaction(
     () => isLongPressed.value,
     () => {
-      if (isKeyboardVisible) return;
+      if (isKeyboardVisible) {
+        return;
+      }
       runOnJS(handleVisibility)();
     }
   );

@@ -8,7 +8,7 @@ const Indicator = (props: ActivityIndicatorProps) => (
     style={styles.loaderStyle}
     pointerEvents="none"
     color={Colors.loaderColor}
-    size={'large'}
+    size="large"
     {...props}
   />
 );

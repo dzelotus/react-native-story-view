@@ -14,7 +14,7 @@ export interface StoryAvatarProps extends StoryAvatarStyleProps {
   item?: StoriesType;
   pressedIndex?: number;
   isStoryViewVisible?: boolean;
-  viewedStories?: Array<boolean[]>;
+  viewedStories?: boolean[][];
   openStories?: (position: number, gestureEvent: GestureResponderEvent) => void;
 }
 

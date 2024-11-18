@@ -85,7 +85,9 @@ const useStoryContainer = (
       appState.current.match(/inactive|background/) &&
       nextAppState === 'active';
 
-    if (props?.index !== props?.userStoryIndex) return;
+    if (props?.index !== props?.userStoryIndex) {
+      return;
+    }
     setPause(isBackgroundState === null ? false : !isBackgroundState);
   };
 
@@ -120,12 +122,12 @@ const useStoryContainer = (
   ]);
 
   const onVideoLoaded = (length: OnLoadData) => {
-    setPause(false);
     setDuration(
       props?.stories?.[progressIndex]?.duration ??
-        props?.maxVideoDuration ??
-        length?.duration
+        length?.duration ??
+        props?.maxVideoDuration
     );
+    //setPause(false);
   };
 
   const onVideoEnd = () => {
@@ -159,7 +161,9 @@ const useStoryContainer = (
   };
 
   const onArrowClick = (type: string) => {
-    if (props?.userStoryIndex !== props?.index) return;
+    if (props?.userStoryIndex !== props?.index) {
+      return;
+    }
     switch (type) {
       case ClickPosition.Left:
         onChange(progressIndex - 1);
@@ -175,7 +179,9 @@ const useStoryContainer = (
   };
 
   const onChange = (position: number) => {
-    if (isPause) return;
+    if (isPause) {
+      return;
+    }
     if (
       position >= props?.stories?.length &&
       props?.userStoryIndex !== undefined
@@ -191,13 +197,17 @@ const useStoryContainer = (
   };
 
   const onStoryPressHold = () => {
-    if (storyMode === StoryMode.MultiStory) return;
+    if (storyMode === StoryMode.MultiStory) {
+      return;
+    }
     setVisibleElements(false);
     setPause(true);
   };
 
   const onStoryPressRelease = () => {
-    if (storyMode === StoryMode.MultiStory) return;
+    if (storyMode === StoryMode.MultiStory) {
+      return;
+    }
     if (isPause && !visibleElements) {
       setVisibleElements(true);
       setPause(false);

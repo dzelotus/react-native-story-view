@@ -1,6 +1,6 @@
 import { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { useAnimatedStyle } from 'react-native-reanimated';
-import type { StoryRef } from 'src/components/StoryView';
+import type { StoryRef } from '../../../components/StoryView';
 import { cubeTransition, scaleTransition } from '../utils/StoryTransitions';
 import { ScrollValue, TransitionMode } from '../types';
 import { Metrics } from '../../../theme';
@@ -8,7 +8,7 @@ import { Metrics } from '../../../theme';
 const useMultiStoryItems = (
   index: number,
   ref: any,
-  viewedStories: Array<boolean[]>,
+  viewedStories: boolean[][],
   storyIndex: number,
   storyLength: number,
   isInitialStory?: boolean,
@@ -54,7 +54,9 @@ const useMultiStoryItems = (
   const angle = Math.atan(perspective / (width / ratio));
 
   const animationStyle = useAnimatedStyle(() => {
-    if (!scrollX) return {};
+    if (!scrollX) {
+      return {};
+    }
     if (scrollX?.value === 0) {
       return {};
     }
@@ -73,7 +75,9 @@ const useMultiStoryItems = (
       onComplete?.();
       return;
     }
-    if (storyIndex >= storyLength - 1) return;
+    if (storyIndex >= storyLength - 1) {
+      return;
+    }
     flatListRef.current?.scrollToIndex({
       index: storyIndex + 1,
       animated: true,
@@ -81,7 +85,9 @@ const useMultiStoryItems = (
   };
 
   const previousStory = () => {
-    if (storyIndex === 0) return;
+    if (storyIndex === 0) {
+      return;
+    }
     flatListRef.current?.scrollToIndex({
       index: storyIndex - 1,
       animated: true,
