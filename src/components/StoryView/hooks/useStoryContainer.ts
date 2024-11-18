@@ -23,7 +23,7 @@ import {
   StroyTypes,
 } from '../types';
 
-type ExtendedProgressData = OnProgressData & { atValue: number };
+type ExtendedProgressData = OnProgressData & { atValue?: number };
 
 const useStoryContainer = (
   { onChangePosition, ...props }: StoryContainerProps,
