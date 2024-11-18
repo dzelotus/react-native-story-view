@@ -23,6 +23,8 @@ import {
   StroyTypes,
 } from '../types';
 
+type ExtendedProgressData = OnProgressData & { atValue: number };
+
 const useStoryContainer = (
   { onChangePosition, ...props }: StoryContainerProps,
   viewedStories: MutableRefObject<boolean[]>
@@ -135,7 +137,7 @@ const useStoryContainer = (
     }
   };
 
-  const onVideoProgress = (progressData?: OnProgressData) => {
+  const onVideoProgress = (progressData?: ExtendedProgressData) => {
     if (progressData?.atValue !== 1000) {
       const videoDurations = [...videoDuration];
       videoDurations[progressIndex] = progressData?.currentTime ?? 0;
