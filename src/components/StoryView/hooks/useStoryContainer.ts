@@ -136,10 +136,12 @@ const useStoryContainer = (
   };
 
   const onVideoProgress = (progressData?: OnProgressData) => {
-    const videoDurations = [...videoDuration];
-    videoDurations[progressIndex] = progressData?.currentTime ?? 0;
-    setVideoDuration([...videoDurations]);
-    !isLoaded && setLoaded(true);
+    if (progressData?.atValue !== 1000) {
+      const videoDurations = [...videoDuration];
+      videoDurations[progressIndex] = progressData?.currentTime ?? 0;
+      setVideoDuration([...videoDurations]);
+      !isLoaded && setLoaded(true);
+    }
   };
 
   const changeStory = (evt: NativeTouchEvent) => {
