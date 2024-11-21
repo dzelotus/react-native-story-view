@@ -4,7 +4,6 @@ import {
   ActivityIndicator,
   Platform,
   ActivityIndicatorProps,
-  Text,
 } from 'react-native';
 import Video, { VideoRef, OnBufferData } from 'react-native-video';
 import type { OnLoadData, OnProgressData } from 'react-native-video';
@@ -118,20 +117,6 @@ const StoryVideo = ({
         }}
         style={styles.contentVideoView}
       />
-      <View
-        style={{
-          position: 'absolute',
-          top: 0,
-          bottom: 0,
-          left: 0,
-          right: 0,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text style={{ color: 'red', fontSize: 16 }}>
-          {source?.url?.split('.').pop()}
-        </Text>
-      </View>
       {(loading || buffering) && (
         <ActivityIndicator
           animating
