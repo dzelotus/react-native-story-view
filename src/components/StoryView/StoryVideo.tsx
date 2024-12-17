@@ -23,6 +23,7 @@ interface StoryVideoProps {
   setPause?: (value: boolean) => void;
   onVideoEnd?: () => void;
   onVideoProgress?: (progressData?: OnProgressData) => void;
+  onVideoLoaded?: (arg0: OnLoadData) => void;
   videoProps: any;
   showSourceIndicator?: boolean;
   sourceIndicatorProps?: ActivityIndicatorProps;
@@ -36,6 +37,7 @@ const StoryVideo = ({
   setPause,
   onVideoEnd,
   onVideoProgress,
+  onVideoLoaded,
   sourceIndicatorProps,
 }: StoryVideoProps) => {
   const [loading, setLoading] = useState(true);
@@ -114,6 +116,7 @@ const StoryVideo = ({
           videoData.current = item;
           videoRef?.current?.resume();
           loadVideo();
+          onVideoLoaded?.(item);
         }}
         style={styles.contentVideoView}
       />

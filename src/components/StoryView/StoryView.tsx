@@ -33,6 +33,7 @@ const StoryView = (props: StoryViewProps) => {
             showSourceIndicator={props?.showSourceIndicator}
             sourceIndicatorProps={props?.sourceIndicatorProps}
             videoProps={props?.videoProps}
+            onVideoLoaded={props?.onVideoLoaded}
           />
         )
       )}

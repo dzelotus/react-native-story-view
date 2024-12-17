@@ -18,7 +18,6 @@ const useProgressBar = ({
   const [width, setWidth] = useState<number>(0);
   const [remainingTime, setRemainingTime] = useState<number>(duration);
   const isVideoStory = useRef(storyType === StroyTypes.Video);
-
   // Restart ProgressBar when story changes
   useEffect(() => {
     if (index === currentIndex) {

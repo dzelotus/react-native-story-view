@@ -1,6 +1,6 @@
 import { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { useAnimatedStyle } from 'react-native-reanimated';
-import type { StoryRef } from '../../../components/StoryView';
+import type { StoryRef } from '../../StoryView';
 import { cubeTransition, scaleTransition } from '../utils/StoryTransitions';
 import { ScrollValue, TransitionMode } from '../types';
 import { Metrics } from '../../../theme';
