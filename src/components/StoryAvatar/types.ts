@@ -1,6 +1,5 @@
 import type {
   GestureResponderEvent,
-  ImageProps,
   ImageStyle,
   PressableProps,
   TextProps,
@@ -8,6 +7,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 import type { StoriesType } from '../StoryView/types';
+import { FastImageProps } from 'react-native-fast-image';
 
 export interface StoryAvatarProps extends StoryAvatarStyleProps {
   index: number;
@@ -22,7 +22,7 @@ export interface StoryAvatarStyleProps {
   userNameStyle?: TextStyle;
   userImageStyle?: ImageStyle;
   containerStyle?: ViewStyle;
-  userImageProps?: ImageProps;
+  userImageProps?: FastImageProps;
   userNameProps?: TextProps;
   rootProps?: PressableProps;
   viewedStoryContainerStyle?: ViewStyle;
