@@ -60,7 +60,8 @@
     "react-native-gesture-handler": ">=2.13.4",
     "react-native-reanimated": ">=3.5.4",
     "react-native-video": ">=5",
-    "react-native-video-cache-control": "*"
+    "react-native-video-cache-control": "*",
+    "react-native-fast-image": ">=8.6.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -94,7 +95,8 @@
     "react-native-video": "^6",
     "react-native-video-cache-control": "^1.2.2",
     "react-test-renderer": "17.0.2",
-    "typescript": "5.1.3"
+    "typescript": "5.1.3",
+    "react-native-fast-image": "8.6.3"
   },
   "resolutions": {
     "@types/react": "~18.2.14",
@@ -133,7 +135,5 @@
       "@commitlint/config-conventional"
     ]
   },
-  "dependencies": {
-    "react-native-fast-image": "^8.6.3"
-  }
+  "dependencies": {}
 }
