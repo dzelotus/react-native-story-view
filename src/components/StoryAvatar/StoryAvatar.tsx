@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import styles from './styles';
 import type { StoryAvatarProps } from './types';
-import FastImage from 'react-native-fast-image';
+import SafeImage from './SafeImage';
 
 const StoryAvatar = forwardRef<View, StoryAvatarProps>(
   (
@@ -41,8 +41,8 @@ const StoryAvatar = forwardRef<View, StoryAvatarProps>(
         {...rootProps}>
         <Animated.View ref={ref}>
           <View style={_containerStyle}>
-            <FastImage
-              resizeMode={FastImage.resizeMode.cover}
+            <SafeImage
+              resizeMode="cover"
               source={{ uri: item?.profile }}
               style={[_userImageStyle as any]}
               {...userImageProps}
