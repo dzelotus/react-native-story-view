@@ -7,10 +7,7 @@ let FinalImage: React.ComponentType<RNImageProps> = RNImage;
 try {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   FinalImage = require('expo-image').Image;
-  console.log('[SafeImage] Using expo-image');
-} catch {
-  console.warn('[SafeImage] expo-image not found, falling back to RN Image');
-}
+} catch {}
 
 const SafeImage: React.FC<RNImageProps> = props => {
   return <FinalImage {...props} />;
