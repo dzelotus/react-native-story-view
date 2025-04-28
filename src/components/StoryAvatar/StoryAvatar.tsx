@@ -3,7 +3,6 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import styles from './styles';
 import type { StoryAvatarProps } from './types';
-import SafeImage from './SafeImage';
 
 const StoryAvatar = forwardRef<View, StoryAvatarProps>(
   (
@@ -41,7 +40,7 @@ const StoryAvatar = forwardRef<View, StoryAvatarProps>(
         {...rootProps}>
         <Animated.View ref={ref}>
           <View style={_containerStyle}>
-            <SafeImage
+            <Animated.Image
               resizeMode="cover"
               source={{ uri: item?.profile }}
               style={[_userImageStyle as any]}
