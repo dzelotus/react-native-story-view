@@ -43,9 +43,9 @@
     "/lib"
   ],
   "scripts": {
-    "prepare": "husky && yarn build",
+    "prepare": "husky",
     "clean": "rm -rf node_modules",
-    "build": "rm -rf lib && tsc -v",
+    "build": "echo 'sckip build'",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint 'src/**/*.{js,jsx,ts,tsx}' -c .eslintrc --fix ",
     "build_local": "yarn build && yarn pack",
